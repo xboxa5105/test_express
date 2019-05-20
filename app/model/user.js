@@ -7,7 +7,7 @@ var User = sequelize.define(users, {
     email: Sequelize.STRING,
     username: Sequelize.STRING,
     password: Sequelize.STRING,
-    permission: Sequelize.STRING,
+    // permission: Sequelize.STRING,
     // timestamp: Sequelize.DATE,
 }, {
         freezeTableName: false,
