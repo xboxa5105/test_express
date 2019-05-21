@@ -19,7 +19,12 @@ module.exports = class UserController {
             .then((user) => {
                 console.log(user)
                 // req.flash('success_msg', 'you are registered now log in')
-                res.redirect('/signin')
+                res.redirect('/')
             })
+    }
+    async logout(req, res, next) {
+      req.logout()
+      req.flash('success_msg', 'You are logged out')
+      res.redirect('/')
     }
 }
