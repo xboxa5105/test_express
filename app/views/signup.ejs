@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Express Passport</title>
+  <title>Express</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
@@ -13,7 +13,11 @@
     <% }) %>
   <% } %>
   <h1>Sign up</h1>
-  <form method="post" action="/users/signup">
+  <form method="post" action="/signup">
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" name="email" placeholder="Email">
+      </div>
     <div class="form-group">
       <label>Username</label>
       <input type="text" class="form-control" name="username" placeholder="Username">

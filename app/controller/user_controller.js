@@ -18,7 +18,7 @@ module.exports = class UserController {
         User.create(req_body)
             .then((user) => {
                 console.log(user)
-                req.flash('success_msg', 'you are registered now log in')
+                // req.flash('success_msg', 'you are registered now log in')
                 res.redirect('/signin')
             })
     }
