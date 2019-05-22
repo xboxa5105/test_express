@@ -5,10 +5,10 @@ var sequelize = require(`${global.appRoot}/config/sequelize`)
 
 var Member = sequelize.define("members", {
     username: Sequelize.STRING,
-    gerder: Sequelize.STRING,
-    birth_year: Sequelize.INTEGER,
-    birth_month: Sequelize.INTEGER,
-    birth_date: Sequelize.INTEGER,
+    gender: Sequelize.STRING,
+    birth: Sequelize.DATEONLY,
+    // birth_month: Sequelize.DATE,
+    // birth_date: Sequelize.DATE,
     // timestamp: Sequelize.DATE,
 }, {
         freezeTableName: false,

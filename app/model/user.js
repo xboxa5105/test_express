@@ -5,6 +5,11 @@ var bcrypt = require("bcrypt")
 // class User extends Model { }
 
 var User = sequelize.define("users", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     email: Sequelize.STRING,
     username: Sequelize.STRING,
     password: Sequelize.STRING,

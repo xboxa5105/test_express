@@ -4,33 +4,30 @@ var member_controller = require(`${global.appRoot}/app/controller/member_control
 var auth = require(`${global.appRoot}/app/middleware/auth`)
 
 const MemberController = new member_controller
-// console.log("auth", auth);
-// router.use(auth)
+router.use(auth)
 
 router.get('/', MemberController.index)
 
-router.get('/edit', MemberController.index)
+router.get('/member/create', MemberController.getcreate)
 
-router.post('/edit', MemberController.index)
+router.post('/member/create', MemberController.postcreate)
 
-router.get('/create', MemberController.index)
+router.get('/member/update/:id', MemberController.getupdate)
 
-router.post('/create', MemberController.index)
+router.put('/member/update/:id', MemberController.putupdate)
 
-router.put('/', MemberController.index)
-
-router.delete('/', MemberController.index)
+// router.delete('/member/delete', MemberController.delete)
 
 module.exports = router;
 
 
-function ensureAuthenticated(req, res, next){
-  if(req.isAuthenticated()){
-    console.log("1")
-    return next();
-  } else {
-    console.log("2")
-    // req.flash('error_msg', 'you are not logged in')
-    res.redirect('/')
-  }
-}
+// function ensureAuthenticated(req, res, next){
+//   if(req.isAuthenticated()){
+//     console.log("1")
+//     return next();
+//   } else {
+//     console.log("2")
+//     // req.flash('error_msg', 'you are not logged in')
+//     res.redirect('/')
+//   }
+// }

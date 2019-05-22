@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Express</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>Member Create</h1>
+  <% if(member.id == current){ %>
+    <form method="post" action="/member/create" id="memberinfo">
+        <!-- <h2><%= member.username %></h2> -->
+        <div class="form-group">
+        <label>Member Name</label>
+        <input type="text" class="form-control" name="membername" placeholder="name" value="<%= member.username %>">
+        </div>
+        <!-- <h2><%= member.gender %></h2> -->
+        <div>
+            <label>Member Birth</label>
+            <input type="date" class="form-control" name="year" placeholder="year" value="<%= member.gender %>">
+        </div>
+        <br>
+        <!-- <h2><%= member.birth %></h2> -->
+        <select class="selectgender" name="selectgender" form="memberinfo">
+        <option value="" selected disabled hidden>Choose here</option>
+        <option value="man">Man</option>
+        <option value="woman">Woman</option>
+        </select>
+        <button type="submit" class="btn btn-default">update</button>
+    </form>
+    <% }) %>
+  <% } %>
+  <!-- <h2><a href="/member/update/<%= member.id %>">update</a></h2>
+  <h2><a href="/member/delete/<%= member.id %>">delete</a></h2> -->
+</body>
+
+</html>

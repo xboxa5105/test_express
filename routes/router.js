@@ -6,7 +6,7 @@ var membersRouter = require(`${global.appRoot}/routes/members`);
 
 router.use('/', usersRouter);
 
-router.use('/member', membersRouter);
+router.use('/', membersRouter);
 
 module.exports = router;
 

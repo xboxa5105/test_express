@@ -24,7 +24,7 @@ module.exports = class UserController {
     }
     async logout(req, res, next) {
       req.logout()
-      req.flash('success_msg', 'You are logged out')
+    //   req.flash('success_msg', 'You are logged out')
       res.redirect('/')
     }
 }

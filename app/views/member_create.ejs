@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Express</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>Member Create</h1>
+  <form method="post" action="/member/create" id="memberinfo">
+    <div class="form-group">
+      <label>Member Name</label>
+      <input type="text" class="form-control" name="membername" placeholder="name">
+    </div>
+    <div>
+        <!-- <h2>Member Birth</h2> -->
+        <label>Member Birth</label>
+        <input type="date" class="form-control" name="year" placeholder="year">
+        <!-- <label>Month</label>
+        <input type="date" class="form-control" name="month" placeholder="month">
+        <label>Date</label>
+        <input type="date" class="form-control" name="date" placeholder="date"> -->
+    </div>
+    <br>
+    <select class="selectgender" name="selectgender" form="memberinfo">
+      <option value="man">Man</option>
+      <option value="woman">Woman</option>
+    </select>
+    <button type="submit" class="btn btn-default">Create</button>
+  </form>
+</body>
+
+</html>

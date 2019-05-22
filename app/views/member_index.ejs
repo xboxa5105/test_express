@@ -8,7 +8,28 @@
 
 <body>
   <h1>Member</h1>
-  <a href="/logout">Logout</a>
+  <table border="1">
+    <tr>
+      <th>name</th>
+      <th>gerder</th>
+      <th>birth</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    <tr>
+    <% if(members){ %>
+      <% members.forEach(function(member) { %>
+        <td><%= member.username %></td>
+        <td><%= member.gender %></td>
+        <td><%= member.birth %></td>
+        <td><a href="/member/update/<%= member.id %>">update</a></td>
+        <td><a href="/member/delete/<%= member.id %>">delete</a></td>
+        <% }) %>
+      <% } %>
+    </tr>
+  </table>
+  <div><a href="/member/create">Create</a></div>
+  <div><a href="/logout">Logout</a></div>
 </body>
 
 </html>

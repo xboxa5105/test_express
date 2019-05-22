@@ -5,53 +5,39 @@ var bcrypt = require("bcrypt")
 var router = express.Router();
 var user_controller = require(`${global.appRoot}/app/controller/user_controller`)
 var User = require(`${global.appRoot}/app/model/user`)
-var app = express();
 
 const UserController = new user_controller
-/* GET users listing. */
-router.get('/', UserController.getsignin);
-
-router.post('/',
-  passport.authenticate('local', {
-    successRedirect: '/profile',
-    failureRedirect: '/',
-    failureFlash: true
-  }),
-  function (req, res) {
-    res.redirect('/profile')
-  }
-);
 
 router.get('/signup', UserController.getsignup)
 
 router.post('/signup', UserController.postsignup);
 
-router.get('/logout', function(req, res, next) {
-  req.logout()
-  // req.flash('success_msg', 'You are logged out')
-  res.redirect('')
-})
+router.get('/signin', UserController.getsignin);
 
-app.use(ensureAuthenticated)
-
-router.get('/profile', function(req, res, next) {
-  console.log("req.user", req.user)
-  res.render('profile', {
-    user: req.user.username
-  });
-});
-
-function ensureAuthenticated(req, res, next){
-  console.log("===> ", req.session)
-  if(req.isAuthenticated()){
-    console.log("1")
-    return next();
-  } else {
-    console.log("2")
-    // req.flash('error_msg', 'you are not logged in')
+router.post('/signin',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/signin',
+    failureFlash: true
+  }),
+  function (req, res) {
     res.redirect('/')
   }
-}
+);
+
+router.get('/logout', UserController.logout)
+
+// function ensureAuthenticated(req, res, next){
+//   console.log("===> ", req.session)
+//   if(req.isAuthenticated()){
+//     console.log("1")
+//     return next();
+//   } else {
+//     console.log("2")
+//     // req.flash('error_msg', 'you are not logged in')
+//     res.redirect('/signin')
+//   }
+// }
 
 passport.use(new LocalStrategy(
   function (username, password, done) {
@@ -80,18 +66,22 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log("----", done)
-  User.findOne({ where: { id: id } })
-  .then((err, user) => {
-    console.log("----", done(err, user))
-    return done(err, user);
+  User.findOne({ where: { id: id }, raw: true })
+  .then(function(user){
+    return done(null, user);
   })
   .catch((err) => {
     console.log("errr : ", err)
   })
-  // User.getUserById(id, function(err, user) {
-  //   done(err, user);
-  // });
+  // try {
+  //   let user = await User.findOne({ where: { id: id }, raw: true })
+  //   console.log(user)
+  //   // User.getUserById(id, function(err, user) {
+  //   // });
+  //   done(null, user);
+  // } catch (e) {
+  //   console.log("E : ", e)
+  // }
 });
 
 module.exports = router;
