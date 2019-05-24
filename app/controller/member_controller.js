@@ -4,65 +4,94 @@ const Member = require(`../model/member`)
 
 module.exports = MemberController = {
     index: async function (req, res, next) {
-        let members = await Member.findAll()
-        console.log(res.locals)
-        res.render('member_index', { members: members });
+        try {
+            let members = await Member.findAll()
+            console.log(res.locals)
+            res.render('member_index', { members: members });
+        } catch (e) {
+            console.log("MemberController index : ", e);
+            res.status(400).json({ errors: "Members Get has Error" });
+        }
     },
     getcreate: async function (req, res, next) {
         res.render('member_create');
     },
     postcreate: async function (req, res, next) {
-        let errors = validationResult(req).formatWith(errorFormatter);
-        if (!errors.isEmpty()) {
-            // console.log(errors.array());
-            return res.status(422).json({ errors: errors.array() });
+        try {
+            let errors = validationResult(req).formatWith(errorFormatter);
+            if (!errors.isEmpty()) {
+                console.log("MemberController postcreate validation : ", errors.array());
+                return res.status(422).json({ errors: errors.array() });
+            }
+            let req_body = {
+                username: req.body.membername,
+                gender: req.body.selectgender,
+                birth: req.body.year,
+            }
+            await Member.create(req_body)
+            res.redirect('/');
+        } catch (e) {
+            console.log("MemberController postcreate : ", e);
+            if (e.message == "Validation error") {
+                res.status(400).json({ errors: e.errors[0].message });
+            } else {
+                res.status(400).json({ errors: "Member Create has Error" });
+            }
         }
-        let req_body = {
-            username: req.body.membername,
-            gender: req.body.selectgender,
-            birth: req.body.year,
-        }
-        Member.create(req_body)
-            .then((member) => {
-                res.redirect('/');
-            })
     },
     getupdate: async function (req, res, next) {
-        let member = await Member.findOne({ where: { id: req.params.id } })
-        res.render('member_update', { member: member, current: req.params.id });
+        try {
+            let member = await Member.findOne({ where: { id: req.params.id } })
+            res.render('member_update', { member: member, current: req.params.id });
+        } catch (e) {
+            console.log("MemberController getupdate : ", e);            
+            res.status(400).json({ errors: "Member Get has Error" });
+        }
     },
     putupdate: async function (req, res, next) {
-        console.log(req.body);
-
-        let member = await Member.findOne({ where: { id: req.params.id } })
-        let req_membername
-        let req_selectgender
-        let req_birth
-        if (req.body.membername !== null && req.body.membername !== '') {
-            req_membername = req.body.membername
-        } else {
-            req_membername = member.username
+        try {
+            let member = await Member.findOne({ where: { id: req.params.id } })
+            let req_membername
+            let req_selectgender
+            let req_birth
+            if (req.body.membername !== null && req.body.membername !== '') {
+                req_membername = req.body.membername
+            } else {
+                req_membername = member.username
+            }
+            if (req.body.selectgender !== null && req.body.selectgender !== '') {
+                req_selectgender = req.body.selectgender
+            } else {
+                req_selectgender = member.gender
+            }
+            if (req.body.year !== null && req.body.year !== '') {
+                req_birth = req.body.year
+            } else {
+                req_birth = member.birth
+            }
+            let update_body = {
+                username: req_membername,
+                gender: req_selectgender,
+                birth: req_birth,
+            }
+            await member.update(update_body)
+            res.redirect('/');
+        } catch (e) {
+            console.log("MemberController putupdate : ", e); 
+            if (e.message == "Validation error") {
+                res.status(400).json({ errors: e.errors[0].message });
+            } else {
+                res.status(400).json({ errors: "Member Update has Error" });
+            }
         }
-        if (req.body.selectgender !== null && req.body.selectgender !== '') {
-            req_selectgender = req.body.selectgender
-        } else {
-            req_selectgender = member.gender
-        }
-        if (req.body.year !== null && req.body.year !== '') {
-            req_birth = req.body.year
-        } else {
-            req_birth = member.birth
-        }
-        let update_body = {
-            username: req_membername,
-            gender: req_selectgender,
-            birth: req_birth,
-        }
-        await member.update(update_body)
-        res.redirect('/');
     },
     delete: async function (req, res, next) {
-        await Member.destroy({ where: { id: req.params.id } })
-        res.redirect('/');
+        try {
+            await Member.destroy({ where: { id: req.params.id } })
+            res.redirect('/');
+        } catch (e) {
+            console.log("MemberController delete : ", e); 
+            res.status(400).json({ errors: "Member Delete has Error" });
+        }
     }
 }

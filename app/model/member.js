@@ -2,9 +2,24 @@ const Sequelize = require('sequelize')
 const sequelize = require(`../../config/sequelize`)
 
 const Member = sequelize.define("members", {
-    username: Sequelize.STRING,
-    gender: Sequelize.STRING,
-    birth: Sequelize.DATEONLY,
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+    },
+    gender: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    birth: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+    },
 }, {
         freezeTableName: false,
         timestamps: true
