@@ -28,7 +28,7 @@ module.exports = MemberController = {
             })
     },
     getupdate: async function (req, res, next) {
-        await Member.findOne({ where: { id: req.params.id } })
+        let member = await Member.findOne({ where: { id: req.params.id } })
         res.render('member_update', { member: member, current: req.params.id });
     },
     putupdate: async function (req, res, next) {
@@ -62,7 +62,7 @@ module.exports = MemberController = {
         res.redirect('/');
     },
     delete: async function (req, res, next) {
-        let member = await Member.destroy({ where: { id: req.params.id } })
+        await Member.destroy({ where: { id: req.params.id } })
         res.redirect('/');
     }
 }

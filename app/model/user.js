@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize')
-// const Model = Sequelize.Model;
 const sequelize = require(`../../config/sequelize`)
 const bcrypt = require("bcrypt")
-// class User extends Model { }
 
 const User = sequelize.define("users", {
     id: {
@@ -13,8 +11,6 @@ const User = sequelize.define("users", {
     email: Sequelize.STRING,
     username: Sequelize.STRING,
     password: Sequelize.STRING,
-    // permission: Sequelize.STRING,
-    // timestamp: Sequelize.DATE,
 }, {
         freezeTableName: false,
         timestamps: true,
@@ -34,15 +30,5 @@ User.sync({
 }).catch(function (err) {
     console.log('Model User Err : ', err)
 })
-
-// bcrypt.genSalt(5, function (err, salt) {
-//     if (err) return callback(err);
-
-//     bcrypt.hash(user.password, salt, null, function (err, hash) {
-//         if (err) return callback(err);
-//         user.password = hash;
-//         callback();
-//     })
-// })
 
 module.exports = User

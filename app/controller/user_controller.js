@@ -16,7 +16,6 @@ module.exports = UserController = {
     postsignup: async function (req, res) {
         let errors = validationResult(req).formatWith(errorFormatter);
         if (!errors.isEmpty()) {
-            // console.log(errors.array());
             return res.status(422).json({ errors: errors.array() });
         }
         let req_body = {
@@ -51,7 +50,6 @@ module.exports = UserController = {
     },
     logout: async function (req, res, next) {
         req.logout()
-        //   req.flash('success_msg', 'You are logged out')
         res.redirect('/')
     }
 }

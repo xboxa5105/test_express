@@ -16,11 +16,6 @@ router.post('/signup', [check('email').isEmail(), check('username').exists(), ch
 router.get('/signin', UserController.getsignin);
 
 router.post('/signin', [check('username').exists(), check('password').exists()],
-  // passport.authenticate('local', {
-  //   successRedirect: '/',
-  //   failureRedirect: '/signin',
-  //   failureFlash: 'Invalid username or password.'
-  // }),
   UserController.postsignin
 );
 
