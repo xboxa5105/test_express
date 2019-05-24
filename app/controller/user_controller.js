@@ -7,11 +7,11 @@ const User = require(`../model/user`)
 module.exports = UserController = {
     getsignin: async function (req, res, next) {
         console.log(res.locals)
-        res.render('signin', { errors: '' });
+        res.render('signin');
     },
     getsignup: async function (req, res, next) {
         console.log(res.locals)
-        res.render('signup', { errors: '' })
+        res.render('signup')
     },
     postsignup: async function (req, res) {
         let errors = validationResult(req).formatWith(errorFormatter);
