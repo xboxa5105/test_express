@@ -21,9 +21,9 @@
         </div>
         <p>Member Gender</p>
         <select class="selectgender" name="selectgender" form="memberinfo">
-        <option value="" selected disabled hidden><%= member.gender.toUpperCase() %></option>
-        <option value="man">MAN</option>
-        <option value="woman">WOMAN</option>
+        <option value="" selected disabled hidden><%= member.gender %></option>
+        <option value="man">man</option>
+        <option value="woman">woman</option>
         </select>
         <button type="submit" class="btn btn-default">update</button>
     </form>

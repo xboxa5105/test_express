@@ -7,11 +7,6 @@
 </head>
 
 <body>
-  <% if(errors){ %>
-    <% errors.forEach(function(error){ %>
-    <div class="error"><%= error.msg %></div>
-    <% }) %>
-  <% } %>
   <h1>Sign up</h1>
   <form method="post" action="/signup">
     <div class="form-group">
