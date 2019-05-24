@@ -9,27 +9,24 @@
 <body>
   <h1>Member Create</h1>
   <% if(member.id == current){ %>
-    <form method="post" action="/member/create" id="memberinfo">
+    <form method="post" action="/member/update/<%= member.id %>" id="memberinfo">
         <!-- <h2><%= member.username %></h2> -->
         <div class="form-group">
         <label>Member Name</label>
         <input type="text" class="form-control" name="membername" placeholder="name" value="<%= member.username %>">
         </div>
-        <!-- <h2><%= member.gender %></h2> -->
         <div>
-            <label>Member Birth</label>
-            <input type="date" class="form-control" name="year" placeholder="year" value="<%= member.gender %>">
+            <label>Member Birth : <%= member.birth %></label>
+            <input type="date" class="form-control" name="year" placeholder="year">
         </div>
-        <br>
-        <!-- <h2><%= member.birth %></h2> -->
+        <p>Member Gender</p>
         <select class="selectgender" name="selectgender" form="memberinfo">
-        <option value="" selected disabled hidden>Choose here</option>
-        <option value="man">Man</option>
-        <option value="woman">Woman</option>
+        <option value="" selected disabled hidden><%= member.gender.toUpperCase() %></option>
+        <option value="man">MAN</option>
+        <option value="woman">WOMAN</option>
         </select>
         <button type="submit" class="btn btn-default">update</button>
     </form>
-    <% }) %>
   <% } %>
   <!-- <h2><a href="/member/update/<%= member.id %>">update</a></h2>
   <h2><a href="/member/delete/<%= member.id %>">delete</a></h2> -->

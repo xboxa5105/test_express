@@ -1,15 +1,15 @@
-var User = require(`${global.appRoot}/app/model/user`)
+const User = require(`../model/user`)
 
-module.exports = class UserController {
-    async getsignin(req, res, next) {
+module.exports = UserController = {
+    getsignin: async function(req, res, next) {
         console.log(res.locals)
         res.render('signin');
-    }
-    async getsignup(req, res, next) {
+    },
+    getsignup: async function(req, res, next) {
         console.log(res.locals)
         res.render('signup', { errors: '' })
-    }
-    async postsignup(req, res) {
+    },
+    postsignup: async function(req, res) {
         let req_body = {
             email: req.body.email,
             username: req.body.username,
@@ -21,8 +21,8 @@ module.exports = class UserController {
                 // req.flash('success_msg', 'you are registered now log in')
                 res.redirect('/')
             })
-    }
-    async logout(req, res, next) {
+    },
+    logout: async function(req, res, next) {
       req.logout()
     //   req.flash('success_msg', 'You are logged out')
       res.redirect('/')

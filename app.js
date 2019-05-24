@@ -1,15 +1,13 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var path = require('path');
-var passport = require('passport')
-var session = require("express-session")
-global.appRoot = path.resolve(__dirname)
-var Router = require(`${global.appRoot}/routes/router`);
-
-var app = express();
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const passport = require('passport')
+const session = require("express-session")
+const Router = require(`./routes/router`);
+const flash = require('connect-flash');
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
@@ -27,7 +25,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 app.use('/', Router);
 
 // catch 404 and forward to error handler

@@ -1,10 +1,10 @@
-var Sequelize = require('sequelize')
+const Sequelize = require('sequelize')
 // const Model = Sequelize.Model;
-var sequelize = require(`${global.appRoot}/config/sequelize`)
-var bcrypt = require("bcrypt")
+const sequelize = require(`../../config/sequelize`)
+const bcrypt = require("bcrypt")
 // class User extends Model { }
 
-var User = sequelize.define("users", {
+const User = sequelize.define("users", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,

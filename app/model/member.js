@@ -1,9 +1,9 @@
-var Sequelize = require('sequelize')
+const Sequelize = require('sequelize')
 // const Model = Sequelize.Model;
-var sequelize = require(`${global.appRoot}/config/sequelize`)
+const sequelize = require(`../../config/sequelize`)
 // class User extends Model { }
 
-var Member = sequelize.define("members", {
+const Member = sequelize.define("members", {
     username: Sequelize.STRING,
     gender: Sequelize.STRING,
     birth: Sequelize.DATEONLY,
