@@ -3,18 +3,19 @@ const router = express.Router();
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require("bcrypt")
-const member_controller = require(`../app/controller/member_controller`)
+const { check, validationResult } = require('express-validator/check');
+const MemberController = require(`../app/controller/member_controller`)
 const auth = require(`../app/middleware/auth`)
-const user_controller = require(`../app/controller/user_controller`)
+const UserController = require(`../app/controller/user_controller`)
 const User = require(`../app/model/user`)
 
 router.get('/signup', UserController.getsignup)
 
-router.post('/signup', UserController.postsignup);
+router.post('/signup', [check('email').exists(), check('username').exists(), check('password').exists()], UserController.postsignup);
 
 router.get('/signin', UserController.getsignin);
 
-router.post('/signin',
+router.post('/signin', [check('username').exists(), check('password').exists()],
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/signin',
