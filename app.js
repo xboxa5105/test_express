@@ -6,6 +6,7 @@ const logger = require('morgan');
 const passport = require('passport')
 const session = require("express-session")
 const Router = require(`./routes/router`);
+const ApiRouter = require(`./routes/api_router`);
 const flash = require('connect-flash');
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use('/api', ApiRouter);
 app.use('/', Router);
 
 // catch 404 and forward to error handler
@@ -37,7 +39,9 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  console.log("Message : ", res.locals.message);
+  console.log("Error : ", res.locals.error);
+  
   res.status(err.status || 500);
   res.render('error');
 });

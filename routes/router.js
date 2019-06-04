@@ -4,50 +4,49 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require("bcrypt")
 const { check } = require('express-validator/check');
-const MemberController = require(`../app/controller/member_controller`)
+const Controller = require(`../app/controller`)
 const auth = require(`../app/middleware/auth`)
-const UserController = require(`../app/controller/user_controller`)
-const User = require(`../app/model/user`)
+const Model = require("../app/model")
 
-router.get('/signup', UserController.getsignup)
+router.get('/signup', Controller.UserController.getsignup)
 
-router.post('/signup', [check('email').isEmail(), check('username').exists(), check('password').exists()], UserController.postsignup);
+router.post('/signup', [check('email').isEmail(), check('username').exists(), check('password').exists()], Controller.UserController.postsignup);
 
-router.get('/signin', UserController.getsignin);
+router.get('/signin', Controller.UserController.getsignin);
 
 router.post('/signin', [check('username').exists(), check('password').exists()],
-  UserController.postsignin
+  Controller.UserController.postsignin
 );
 
-router.get('/logout', UserController.logout)
+router.get('/logout', Controller.UserController.logout)
 
 router.use(auth)
 
-router.get('/', MemberController.index)
+router.get('/', Controller.MemberController.index)
 
-router.get('/member/create', MemberController.getcreate)
+router.get('/member/create', Controller.MemberController.getcreate)
 
 router.post('/member/create', [
   check('membername').not().isEmpty(),
   check('selectgender').isIn(['man', 'woman']).not().isEmpty(),
-  check('year').not().isEmpty()], MemberController.postcreate)
+  check('year').not().isEmpty()], Controller.MemberController.postcreate)
 
-router.get('/member/update/:id', MemberController.getupdate)
+router.get('/member/update/:id', Controller.MemberController.getupdate)
 
 router.post('/member/update/:id', [
   check('id').exists().not().isEmpty(),
   check('membername').exists(),
   check('gender').isIn(['man', 'woman']),
   check('birth').exists()],
-  MemberController.putupdate)
+  Controller.MemberController.putupdate)
 
-router.get('/member/delete/:id', MemberController.delete)
+router.get('/member/delete/:id', Controller.MemberController.delete)
 
 module.exports = router;
 
 passport.use(new LocalStrategy(
   function (username, password, done) {
-    User.findOne({ where: { username: username } })
+    Model.User.findOne({ where: { username: username } })
       .then((user) => {
         if (!user) {
           return done(null, false, { message: 'Incorrect username' });
@@ -72,7 +71,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-  User.findOne({ where: { id: id }, raw: true })
+  Model.User.findOne({ where: { id: id }, raw: true })
     .then(function (user) {
       return done(null, user);
     })

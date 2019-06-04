@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -19,8 +20,17 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^1.6.5",
+    "oauth2-server": "^3.0.1",
+    "oauth2orize": "^1.11.0",
     "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
+    "passport-oauth2-client-password": "^0.1.2",
+    "passport-oauth2-public-client": "^0.1.0",
     "sequelize": "^5.8.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }

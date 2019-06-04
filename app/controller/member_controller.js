@@ -1,11 +1,11 @@
 const { validationResult } = require('express-validator/check');
 const errorFormatter = require(`../middleware/validator_error`)
-const Member = require(`../model/member`)
+const Model = require(`../model`)
 
 module.exports = MemberController = {
     index: async function (req, res, next) {
         try {
-            let members = await Member.findAll()
+            let members = await Model.Member.findAll()
             console.log(res.locals)
             res.render('member_index', { members: members });
         } catch (e) {
@@ -28,7 +28,7 @@ module.exports = MemberController = {
                 gender: req.body.selectgender,
                 birth: req.body.year,
             }
-            await Member.create(req_body)
+            await Model.Member.create(req_body)
             res.redirect('/');
         } catch (e) {
             console.log("MemberController postcreate : ", e);
@@ -41,7 +41,7 @@ module.exports = MemberController = {
     },
     getupdate: async function (req, res, next) {
         try {
-            let member = await Member.findOne({ where: { id: req.params.id } })
+            let member = await Model.Member.findOne({ where: { id: req.params.id } })
             res.render('member_update', { member: member, current: req.params.id });
         } catch (e) {
             console.log("MemberController getupdate : ", e);            
@@ -50,7 +50,7 @@ module.exports = MemberController = {
     },
     putupdate: async function (req, res, next) {
         try {
-            let member = await Member.findOne({ where: { id: req.params.id } })
+            let member = await Model.Member.findOne({ where: { id: req.params.id } })
             let req_membername
             let req_selectgender
             let req_birth
@@ -74,7 +74,7 @@ module.exports = MemberController = {
                 gender: req_selectgender,
                 birth: req_birth,
             }
-            await member.update(update_body)
+            await Model.Member.update(update_body)
             res.redirect('/');
         } catch (e) {
             console.log("MemberController putupdate : ", e); 
@@ -87,7 +87,7 @@ module.exports = MemberController = {
     },
     delete: async function (req, res, next) {
         try {
-            await Member.destroy({ where: { id: req.params.id } })
+            await Model.Member.destroy({ where: { id: req.params.id } })
             res.redirect('/');
         } catch (e) {
             console.log("MemberController delete : ", e); 

@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator/check');
 const passport = require('passport')
 // const LocalStrategy = require('passport-local').Strategy
 const errorFormatter = require(`../middleware/validator_error`)
-const User = require(`../model/user`)
+const Model = require(`../model`)
 
 module.exports = UserController = {
     getsignin: async function (req, res, next) {
@@ -23,7 +23,7 @@ module.exports = UserController = {
                 username: req.body.username,
                 password: req.body.password
             }
-            await User.create(req_body)
+            await Model.User.create(req_body)
             res.redirect('/')
         } catch (e) {
             console.log("UserController postsignup : ", e);
