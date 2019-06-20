@@ -34,12 +34,12 @@ const User = sequelize.define("users", {
         }
     }
 )
-User.sync({
-    force: false,
-}).then(function () {
-    console.log('Model User is Ok');
-}).catch(function (err) {
-    console.log('Model User Err : ', err)
-})
+// User.sync({
+//     force: false,
+// }).then(function () {
+//     console.log('Model User is Ok');
+// }).catch(function (err) {
+//     console.log('Model User Err : ', err)
+// })
 
 module.exports = User

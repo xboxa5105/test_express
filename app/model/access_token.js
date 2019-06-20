@@ -18,12 +18,12 @@ AccessToken.prototype.findByUserIdAndClientId = async function (user_id, client_
     return await AccessToken.find({ where: { user: user_id, client: client_id } })
 }
 
-AccessToken.sync({
-    force: false,
-}).then(function () {
-    console.log('Model access_token is Ok');
-}).catch(function (err) {
-    console.log('Model access_token Err : ', err)
-})
+// AccessToken.sync({
+//     force: false,
+// }).then(function () {
+//     console.log('Model access_token is Ok');
+// }).catch(function (err) {
+//     console.log('Model access_token Err : ', err)
+// })
 
 module.exports = AccessToken

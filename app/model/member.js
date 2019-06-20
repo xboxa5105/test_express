@@ -25,12 +25,12 @@ const Member = sequelize.define("members", {
         timestamps: true
     }
 )
-Member.sync({
-    force: false,
-}).then(function () {
-    console.log('Model Member is Ok');
-}).catch(function (err) {
-    console.log('Model Member Err : ', err)
-})
+// Member.sync({
+//     force: false,
+// }).then(function () {
+//     console.log('Model Member is Ok');
+// }).catch(function (err) {
+//     console.log('Model Member Err : ', err)
+// })
 
 module.exports = Member

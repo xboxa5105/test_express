@@ -14,12 +14,12 @@ const AuthorizationCode = sequelize.define("authorization_codes", {
     clientId: { type: Sequelize.STRING, allowNull: false }
 });
 
-AuthorizationCode.sync({
-    force: false,
-}).then(function () {
-    console.log('Model authorization_code is Ok');
-}).catch(function (err) {
-    console.log('Model authorization_code Err : ', err)
-})
+// AuthorizationCode.sync({
+//     force: false,
+// }).then(function () {
+//     console.log('Model authorization_code is Ok');
+// }).catch(function (err) {
+//     console.log('Model authorization_code Err : ', err)
+// })
 
 module.exports = AuthorizationCode

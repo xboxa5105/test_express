@@ -8,12 +8,12 @@ const RefreshToken = sequelize.define("refresh_tokens", {
     user: { type: Sequelize.STRING, required: true },
     client: { type: Sequelize.STRING, required: true },
 })
-RefreshToken.sync({
-    force: false,
-}).then(function () {
-    console.log('Model refresh_token is Ok');
-}).catch(function (err) {
-    console.log('Model refresh_token Err : ', err)
-})
+// RefreshToken.sync({
+//     force: false,
+// }).then(function () {
+//     console.log('Model refresh_token is Ok');
+// }).catch(function (err) {
+//     console.log('Model refresh_token Err : ', err)
+// })
 
 module.exports = RefreshToken

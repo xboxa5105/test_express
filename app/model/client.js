@@ -12,12 +12,12 @@ const Client = sequelize.define("clients", {
     redirectUri: Sequelize.STRING,
     grants: Sequelize.STRING,
 })
-Client.sync({
-    force: false,
-}).then(function () {
-    console.log('Model client is Ok');
-}).catch(function (err) {
-    console.log('Model client Err : ', err)
-})
+// Client.sync({
+//     force: false,
+// }).then(function () {
+//     console.log('Model client is Ok');
+// }).catch(function (err) {
+//     console.log('Model client Err : ', err)
+// })
 
 module.exports = Client

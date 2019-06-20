@@ -4,7 +4,7 @@ const passport = require('passport')
 const errorFormatter = require(`../middleware/validator_error`)
 const Model = require(`../model`)
 
-module.exports = UserController = {
+module.exports = {
     getsignin: async function (req, res, next) {
         res.render('signin');
     },

@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator/check');
 const errorFormatter = require(`../middleware/validator_error`)
 const Model = require(`../model`)
 
-module.exports = MemberController = {
+module.exports = {
     index: async function (req, res, next) {
         try {
             let members = await Model.Member.findAll()
